@@ -1,9 +1,11 @@
 //import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react'
 //import { auth } from '../firebaseConfig';
-import { Loging, Sign_up } from '../utils/Authenticarions';
+import { Google_Authentication, Loging, Sign_up } from '../utils/Authenticarions';
 import { BG_COLOR, LOGO_ } from '../utils/Constants';
 import { Link } from 'react-router-dom';
+import GoogleButton from 'react-google-button'
+
 
 const Login = () => {
   const [email,getemail] = useState("");
@@ -21,6 +23,11 @@ const Login = () => {
       console.error(err);
     }*/
   }
+
+  const googleSignIn = () =>{
+    const response = Google_Authentication();
+    console.log(response);
+    }
   return (<div className='h-[100vh] bg-slate-100'>
     <div className='flex justify-between'>
       <Link to="/">
@@ -48,10 +55,17 @@ const Login = () => {
       <button className='block w-full bg-yellow-500 p-1 mt-3 rounded-2xl' type='submit'>Sign In</button>
 
         </form>
-        <div className="inline-flex items-center justify-center my-6 w-full">
+        <div className="inline-flex items-center justify-center mt-6 mb-3 w-full">
     <hr className="w-full h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 " />
     <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-slate-100 left-1/2  ">or</span>
 </div>
+<div className='w-full flex items-center justify-center'>
+<GoogleButton className='rounded-2xl' size ="large" shape="pill"
+  onClick={ googleSignIn}
+/>
+</div>
+
+
                 
 
       </div>

@@ -17,17 +17,19 @@ export const Loging = async(email,password)=>{
     
 }
 
-export const Sign_up = (email,password)=>{
+export const Sign_up_auth = async (email,password)=>{
+    if (password.length > 6){
     try{
-        const check = createUserWithEmailAndPassword(auth,email,password);
-       
+        const check = await createUserWithEmailAndPassword(auth,email,password);
+       toast.success("Your account has been created!!!")
        return check;
     } catch (err){
+        toast.error("Error in createing the account!! Try again")
         return err;
 
 
     }
-    
+}else{toast.error("Password is short");}
 }
 
 

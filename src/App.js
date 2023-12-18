@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Body from './Components/Body';
 import Login from './Components/Login'; 
 import SignUp from './Components/SignUp';
+import Home from './Components/Home';
 
 function App() {
 
@@ -22,6 +23,15 @@ function App() {
         path:"/SignUp",
         element:<SignUp></SignUp>
     },
+    { path:"/body",
+       element:<Body></Body>,
+       children:[{
+        path:"/body/Home",
+        element:<Home></Home>
+       }]
+
+    },
+    
 
       
    

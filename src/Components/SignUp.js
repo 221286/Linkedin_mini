@@ -6,8 +6,8 @@ import GoogleButton from 'react-google-button'
 import { Google_Authentication } from '../utils/Authenticarions'
 
 const SignUp = () => {
-    const [email,getemail]=useState(null);
-    const [password,getpassword]=useState(null);
+    const [email,getemail]=useState("");
+    const [password,getpassword]=useState("");
     const Main_SignUp =(e)=>{
         e.preventDefault();
         const resp = Sign_up_auth(email,password);

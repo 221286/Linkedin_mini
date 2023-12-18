@@ -1,34 +1,42 @@
 //import { createUserWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 //import { auth } from '../firebaseConfig';
 import { Google_Authentication, Loging} from '../utils/Authenticarions';
 import {  LOGO_ } from '../utils/Constants';
 import { Link } from 'react-router-dom';
 import GoogleButton from 'react-google-button'
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
+import { useNavigate } from 'react-router-dom';
+import Spinner from './Spinner';
 
 
 const Login = () => {
+  const [page_load,getpage_load] = useState(false) ;
+  const navigate = useNavigate();
   const [email,getemail] = useState("");
   const [password,getpassword] = useState("")
   const Main_SignIn = (e) =>{
     e.preventDefault();
     const Sign_in= Loging(email,password);
     console.log(Sign_in)
-   
-   
-    /* try {
-      const usercredentntial = createUserWithEmailAndPassword(auth,email,password);
-      console.log(usercredentntial)
-    } catch(err){
-      console.error(err);
-    }*/
   }
 
   const googleSignIn = () =>{
     const response = Google_Authentication();
     
     }
-  return (<div className='h-[100vh] bg-slate-100'>
+
+    useEffect(()=>{
+        onAuthStateChanged(auth,(res)=>{
+          if(res?.accessToken){
+                  navigate("/body/Home")
+          } else {
+             getpage_load(true);
+          }
+        })
+    },[])
+  return  !page_load ? (<div><Spinner></Spinner></div>) : (<div className='h-[100vh] bg-slate-100'>
     <div className='flex justify-between'>
       <Link to="/">
       <img src={LOGO_} className='w-16 p-2' alt="logo"/>
